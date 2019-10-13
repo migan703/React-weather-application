@@ -3,8 +3,8 @@ import Paper from '@material-ui/core/paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import LocationList from './components/LocationList';
-import ForecastExtended from './components/ForecastExtended';
+import LocationListContainer from './containers/LocationListContainer';
+import ForecastExtendedContainer from './containers/ForecastExtendedContainer';
 import {Grid,Col,Row} from 'react-flexbox-grid';
 import './App.css';
 
@@ -17,22 +17,7 @@ const cities = [
 
 class App extends Component {
   
-  constructor(){
-    super();
-    this.state = {city: null};
-  };
-  
-  handleSelectedLocation = city =>{
-    this.setState({
-      city
-    });
-
-    console.log(`handleSelectedLocation ${city}`);
-  }
-  
   render(){
-    const {city} = this.state;
-    console.log(city);
     return (
       <Grid>
         <Row>
@@ -46,19 +31,14 @@ class App extends Component {
         </Row>
         <Row>
           <Col xs={12} md={6}>
-            <LocationList 
-              cities={cities}
-              onSelectedLocation={this.handleSelectedLocation}>
-            </LocationList>
+            <LocationListContainer 
+              cities={cities}>
+            </LocationListContainer>
           </Col>
           <Col xs={12} md={6}>
             <Paper>
               <div className='details'>
-                {
-                  city ? 
-                    <ForecastExtended city={city}></ForecastExtended>:                
-                    null
-                  }              
+                <ForecastExtendedContainer></ForecastExtendedContainer>                            
               </div>               
             </Paper>           
           </Col>
